@@ -9,18 +9,17 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
 
   constructor(public translate: TranslateService) {
-    translate.addLangs(['en', 'hi']);
+    // line 13 is required to add the prepared locale json for internationalization.
+    translate.addLangs(['en', 'hi', 'fr']);
+    // line 15 sets default language of the application.
     translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
     const userLang = localStorage.getItem('userLang');
-
     if (userLang) {
       translate.use(userLang);
     } else {
-      translate.use(browserLang.match(/en|hi/) ? browserLang : 'en');
+      translate.use(browserLang.match(/en|hi|fr/) ? browserLang : 'en');
     }
-
   }
-
 }
